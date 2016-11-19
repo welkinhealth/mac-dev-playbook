@@ -4,16 +4,29 @@
 
   vars_files:
     - vars/main.yml
+    - vars/welkin.yml
+    - vars/python.yml
 
   roles:
-    - geerlingguy.homebrew
-    - geerlingguy.dotfiles
+#    - geerlingguy.homebrew
+#    - geerlingguy.dotfiles
 
   tasks:
-    - include: tasks/ansible-setup.yml
-    - include: tasks/preferences.yml
+#    - include: tasks/ansible-setup.yml
+#    - include: tasks/oh-my-zsh.yml
+
+    # welkin stuff
+
+    - file: path=~/.ssh state=directory
+    - file: path=~/.ssh/authorized_keys
+            state=touch
+    - git: repo=https://github.com/welkinhealth/welkin.git
+           dest=~/Documents/welkin
+           accept_hostkey=True
+
+    #- include: tasks/preferences.yml
 
     # TODO: Use sudo once .osx can be run via root with no user interaction.
-    - name: Run .osx dotfiles.
-      shell: ~/.osx --no-restart
-      changed_when: false
+    #- name: Run .osx dotfiles.
+    #  shell: ~/.osx --no-restart
+    #  changed_when: false

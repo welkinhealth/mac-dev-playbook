@@ -1,0 +1,3 @@
+- name: "Install Python packages"
+  sudo: true
+  pip: name="virtualenvwrapper"

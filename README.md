@@ -1,3 +1,6 @@
+# wiltzius custom
+- Must ensure git works before
+
 # Mac Development Ansible Playbook
 
 [![Build Status](https://travis-ci.org/geerlingguy/mac-dev-playbook.svg?branch=master)](https://travis-ci.org/geerlingguy/mac-dev-playbook)
