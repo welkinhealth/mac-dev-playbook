@@ -1,3 +1,9 @@
 
 homebrew_installed_packages:
-  - postgres
+  - postgresql
+  - libjpeg
+  - s3cmd
+  - libffi
+  - openssl
+  - freetype
+  - imagemagick

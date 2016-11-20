@@ -1,0 +1,22 @@
+- shell: initdb /usr/local/var/postgres -E UTF-8
+  register: result
+#  failed_when: result.failed
+
+- shell: brew services start postgresql
+
+- name: "Create Welkin dev postgres database"
+  shell: createdb welkin
+  register: result
+  failed_when: result.failed and "exists but is not empty" not in result.stderr
+
+#- name: "Create Welkin test postgres database"
+#  postgresql_db: name=welkin_test
+#
+#- name: "Create Welkin e2e test postgres database"
+#  postgresql_db: name=welkin_systemtest
+#
+#- name: "Create Welkin postgres database user"
+#  postgresql_user: name=postgres
+#
+#- name: "Create Welkin engineer database user"
+#  postgresql_user: name=engineer

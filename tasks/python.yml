@@ -1,0 +1,7 @@
+- name: "Upgrade pip"
+  sudo: true
+  pip: name="pip"
+
+- name: "Install global Python packages"
+  sudo: true
+  pip: name="virtualenvwrapper psycopg2"

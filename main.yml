@@ -5,24 +5,28 @@
   vars_files:
     - vars/main.yml
     - vars/welkin.yml
-    - vars/python.yml
 
-  roles:
+#  roles:
 #    - geerlingguy.homebrew
 #    - geerlingguy.dotfiles
 
   tasks:
 #    - include: tasks/ansible-setup.yml
 #    - include: tasks/oh-my-zsh.yml
+    - include: tasks/python.yml
 
     # welkin stuff
+    - homebrew: name={{ item }}
+      with_items: "{{ homebrew_installed_packages }}"
 
+    - include: tasks/welkin-tasks.yml
     - file: path=~/.ssh state=directory
     - file: path=~/.ssh/authorized_keys
             state=touch
     - git: repo=https://github.com/welkinhealth/welkin.git
            dest=~/Documents/welkin
-           accept_hostkey=True
+           update=no
+#           accept_hostkey=True
 
     #- include: tasks/preferences.yml
 
