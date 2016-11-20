@@ -7,3 +7,6 @@ homebrew_installed_packages:
   - openssl
   - freetype
   - imagemagick
+  - node
+
+welkin_git_checkout: ~/Documents/welkin

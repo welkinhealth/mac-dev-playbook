@@ -1,22 +1,65 @@
-- shell: initdb /usr/local/var/postgres -E UTF-8
-  register: result
+- name: Initialize postgres data directory
+  shell: initdb /usr/local/var/postgres -E UTF-8
+  args:
+    creates: /usr/local/var/postgres/postgresql.conf
 #  failed_when: result.failed
 
-- shell: brew services start postgresql
+- name: Start postgres service
+  shell: brew services start postgresql
 
 - name: "Create Welkin dev postgres database"
-  shell: createdb welkin
+  shell: createdb {{ item }}
   register: result
-  failed_when: result.failed and "exists but is not empty" not in result.stderr
+  failed_when: "result.stderr and 'already exists' not in result.stderr"
+  with_items:
+    - welkin
+    - welkin_test
+    - welkin_systemtest
 
-#- name: "Create Welkin test postgres database"
-#  postgresql_db: name=welkin_test
-#
-#- name: "Create Welkin e2e test postgres database"
-#  postgresql_db: name=welkin_systemtest
-#
-#- name: "Create Welkin postgres database user"
-#  postgresql_user: name=postgres
-#
-#- name: "Create Welkin engineer database user"
-#  postgresql_user: name=engineer
+- name: Create postgres users
+  shell: createuser {{ item }}
+  register: result
+  failed_when: "result.stderr and 'already exists' not in result.stderr"
+  with_items:
+    - "-s postgres"
+    - "engineer"
+
+# Welkin checkout Python deps + virtualenv
+
+- name: Set up virtualenv and Welkin requirements
+  pip:  requirements={{ welkin_git_checkout + '/requirements.txt' }}
+        virtualenv={{ welkin_git_checkout + '/ENV' }}
+        virtualenv_python=/usr/local/opt/python/bin/python
+
+# TODO this didn't seem to work the first time
+- name: Run welkin setup.py
+  command: python setup.py develop
+  args:
+    chdir: "{{ welkin_git_checkout }}"
+
+# Set up client-side build deps
+
+- name: Make sure npm is available
+  command: brew postinstall node
+
+- name: Install global npm packages
+  npm: name="{{item}}" global=yes
+  with_items:
+    - bower
+    - brunch
+
+- name: Install per-server npm packages
+  npm: path="{{ welkin_git_checkout }} / {{item}}"
+  with_items:
+    - platypus
+    - shortfin
+    - dugong
+
+- name: Install bower packages
+  command: bower install
+  args:
+    chdir: "{{ welkin_git_checkout }}/{{ item }}"
+  with_items:
+    - platypus
+    - shortfin
+    - dugong

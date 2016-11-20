@@ -1,5 +1,6 @@
 # wiltzius custom
-- Must ensure git works before
+- Must create ssh pub/priv key first
+- Then must ensure git works (can checkout) first too
 
 # Mac Development Ansible Playbook
 

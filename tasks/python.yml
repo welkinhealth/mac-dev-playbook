@@ -5,3 +5,4 @@
 - name: "Install global Python packages"
   sudo: true
   pip: name="virtualenvwrapper psycopg2"
+

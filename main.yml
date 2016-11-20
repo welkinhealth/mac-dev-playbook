@@ -13,20 +13,18 @@
   tasks:
 #    - include: tasks/ansible-setup.yml
 #    - include: tasks/oh-my-zsh.yml
-    - include: tasks/python.yml
+
+#    - include: tasks/python.yml
 
     # welkin stuff
     - homebrew: name={{ item }}
       with_items: "{{ homebrew_installed_packages }}"
 
-    - include: tasks/welkin-tasks.yml
-    - file: path=~/.ssh state=directory
-    - file: path=~/.ssh/authorized_keys
-            state=touch
     - git: repo=https://github.com/welkinhealth/welkin.git
-           dest=~/Documents/welkin
+           dest={{ welkin_git_checkout }}
            update=no
-#           accept_hostkey=True
+
+    - include: tasks/welkin-tasks.yml
 
     #- include: tasks/preferences.yml
 
