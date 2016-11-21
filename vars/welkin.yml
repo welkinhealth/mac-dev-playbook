@@ -8,5 +8,6 @@ homebrew_installed_packages:
   - freetype
   - imagemagick
   - node
+  - awscli
 
 welkin_git_checkout: ~/Documents/welkin

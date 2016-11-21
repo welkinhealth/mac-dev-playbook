@@ -1,3 +1,5 @@
+# Postgres setup
+
 - name: Initialize postgres data directory
   shell: initdb /usr/local/var/postgres -E UTF-8
   args:
