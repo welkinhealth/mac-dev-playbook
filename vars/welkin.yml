@@ -9,5 +9,12 @@ homebrew_installed_packages:
   - imagemagick
   - node
   - awscli
+  - cairo
+  - pango
+  - gdk-pixbuf
+  - libxml2
+  - libxslt
+  - libffi
+  - ghostscript
 
 welkin_git_checkout: ~/Documents/welkin
