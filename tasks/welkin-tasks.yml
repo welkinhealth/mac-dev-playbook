@@ -36,9 +36,10 @@
 
 # Welkin checkout Python deps + virtualenv
 
+# must use homebrew python binary not system python
 - name: Set up virtualenv and Welkin requirements
   pip:  requirements={{ welkin_git_checkout + '/requirements.txt' }}
-        virtualenv={{ welkin_git_checkout + '/ENV' }}
+        virtualenv={{ welkin_virtualenv }}
         virtualenv_python=/usr/local/opt/python/bin/python
 
 # TODO this didn't seem to work the first time

@@ -9,18 +9,19 @@ dotfiles_repo_local_destination: ~/wiltzius-preferences
 dotfiles_files:
   - .bash_profile
   - .zshrc
-#  - .gitconfig   # TODO
-#  - .gitignore   # TODO
+  - .gitconfig
+  - .gitignore_global
   - inputrc.sh
   - .vimrc
 
 homebrew_installed_packages_tom:
   - git
-  - gpg
+#  - gpg
   - python
   - sqlite
   - nmap
   - wget
+  - dockutil
 
 homebrew_taps:
   - homebrew/core

@@ -3,9 +3,9 @@ welkin_link_packages:
   - jpeg
   - libpng
   - freetype
+  - postgresql
 
 welkin_homebrew_packages_2:
-  - postgresql
   - libjpeg
   - s3cmd
   - libffi
@@ -23,3 +23,4 @@ welkin_homebrew_packages_2:
   - ghostscript
 
 welkin_git_checkout: ~/Documents/welkin
+welkin_virtualenv: ~/Documents/ENV

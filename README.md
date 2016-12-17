@@ -1,5 +1,5 @@
 # wiltzius custom
-- Must create ssh pub/priv key first
+- Must install ssh pub/priv key first, and ensure that ssh key is added to your github account
 - Then must ensure git works (can checkout) first too
 
 # Mac Development Ansible Playbook
