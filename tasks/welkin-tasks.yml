@@ -60,7 +60,7 @@
     - brunch
 
 - name: Install per-server npm packages
-  npm: path="{{ welkin_git_checkout }} / {{item}}"
+  npm: path="{{ welkin_git_checkout }}/{{item}}"
   with_items:
     - platypus
     - shortfin
