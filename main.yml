@@ -6,19 +6,25 @@
     - vars/main.yml
     - vars/welkin.yml
 
-#  roles:
-#    - geerlingguy.homebrew
-#    - geerlingguy.dotfiles
+  roles:
+    # need to remove defaults from homebrew somehow
+    - geerlingguy.homebrew
+    - geerlingguy.dotfiles
 
   tasks:
-#    - include: tasks/ansible-setup.yml
-#    - include: tasks/oh-my-zsh.yml
+    - include: tasks/ansible-setup.yml
+    - include: tasks/oh-my-zsh.yml
 
-#    - include: tasks/python.yml
+    - include: tasks/python.yml
+
+    - homebrew_cask: name={{ item }}
+      with_items: "{{ homebrew_cask_apps_tom }}"
+
+    - copy:
+        src: files/spectacle/Shortcuts.json
+        dest: ~/Library/Application Support/Spectacle/Shortcuts.json
 
     # welkin stuff
-    - homebrew: name={{ item }}
-      with_items: "{{ homebrew_installed_packages }}"
 
     - git: repo=https://github.com/welkinhealth/welkin.git
            dest={{ welkin_git_checkout }}

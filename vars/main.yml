@@ -14,7 +14,7 @@ dotfiles_files:
   - inputrc.sh
   - .vimrc
 
-homebrew_installed_packages:
+homebrew_installed_packages_tom:
   - git
   - gpg
   - python
@@ -26,12 +26,12 @@ homebrew_taps:
   - homebrew/core
   - homebrew/versions
 
-homebrew_cask_appdir: /Applications
-homebrew_cask_apps:
+# homebrew_cask_appdir: /Applications
+homebrew_cask_apps_tom:
   - dropbox
   - google-drive
   - google-chrome
-  - sketch
+#  - sketch
   - pycharm
   - iterm2
   - sonos

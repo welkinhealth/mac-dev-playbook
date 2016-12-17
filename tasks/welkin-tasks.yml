@@ -1,3 +1,11 @@
+# homebrew packages
+
+- homebrew: name={{ item }} state=linked
+  with_items: "{{ welkin_link_packages }}"
+
+- homebrew: name={{ item }}
+  with_items: "{{ welkin_homebrew_packages_2 }}"
+
 # Postgres setup
 
 - name: Initialize postgres data directory

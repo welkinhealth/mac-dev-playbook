@@ -1,5 +1,10 @@
 
-homebrew_installed_packages:
+welkin_link_packages:
+  - jpeg
+  - libpng
+  - freetype
+
+welkin_homebrew_packages_2:
   - postgresql
   - libjpeg
   - s3cmd
