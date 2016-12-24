@@ -1,6 +1,8 @@
 # wiltzius custom
 - Must install ssh pub/priv key first, and ensure that ssh key is added to your github account
-- Then must ensure git works (can checkout) first too
+- Then use git to check out this repository
+- Then install ansible: `sudo easy_install pip && sudo pip install ansible`
+- then ansible-galaxy install -r requirements.yml
 
 # Mac Development Ansible Playbook
 

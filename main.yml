@@ -7,7 +7,6 @@
     - vars/welkin.yml
 
   roles:
-    # need to remove defaults from homebrew role somehow
     - geerlingguy.homebrew
     - geerlingguy.dotfiles
 
@@ -29,13 +28,17 @@
 
     # tom stuff
 
+    # for some reason oh-my-zsh re-prompts for sudo password
     - include: tasks/oh-my-zsh.yml
 
-    - homebrew: name={{ item }}
+    - homebrew: name={{ item }} state="linked"
       with_items: "{{ homebrew_installed_packages_tom }}"
 
     - homebrew_cask: name={{ item }}
       with_items: "{{ homebrew_cask_apps_tom }}"
+    
+    # this needs to come after the homebrew install so we have a non-system version of python installed already
+    # otherwise installing virtualenv fails: https://github.com/pypa/pip/issues/3165
 
     - copy:
         src: files/spectacle/Shortcuts.json

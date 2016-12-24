@@ -4,4 +4,4 @@
 
 - name: "Install global Python packages"
   sudo: true
-  pip: name="virtualenvwrapper"
+  pip: name="virtualenvwrapper" extra_args="--ignore-installed"
