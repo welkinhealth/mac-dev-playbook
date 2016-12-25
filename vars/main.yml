@@ -1,8 +1,6 @@
 ---
 downloads: ~/.ansible-downloads/
 
-configure_sudoers: yes
-
 dotfiles_repo: https://github.com/wiltzius/wiltzius-preferences.git
 dotfiles_repo_accept_hostkey: yes
 dotfiles_repo_local_destination: ~/wiltzius-preferences
@@ -17,17 +15,10 @@ dotfiles_files:
 homebrew_installed_packages_tom:
   - git
 #  - gpg
-  - python
-  - sqlite
   - nmap
   - wget
   - dockutil
 
-homebrew_taps:
-  - homebrew/core
-  - homebrew/versions
-
-# homebrew_cask_appdir: /Applications
 homebrew_cask_apps_tom:
   - dropbox
   - google-drive

@@ -1,33 +1,65 @@
 ---
-# Custom Terminal theme.
-- name: Get current Terminal profile.
-  shell: defaults read com.apple.terminal 'Default Window Settings'
-  register: terminal_theme
-  changed_when: false
-  always_run: yes
 
-- name: Ensure custom Terminal profile is added.
-  shell: open files/terminal/JJG-Term.terminal
-  changed_when: false
-  when: "'JJG-Term' not in terminal_theme.stdout"
+# App-specific preferences
+- copy:
+    src: files/spectacle/Shortcuts.json
+    dest: ~/Library/Application Support/Spectacle/Shortcuts.json
 
-# TODO: This doesn't work in Yosemite. Consider a different solution?
-- name: Ensure custom Terminal profile is set as default.
-  shell: "{{ item }}"
-  with_items:
-    - defaults write com.apple.terminal 'Default Window Settings' -string JJG-Term
-    - defaults write com.apple.terminal 'Startup Window Settings' -string JJG-Term
-  changed_when: false
-  when: "'JJG-Term' not in terminal_theme.stdout"
+# Dock
+- name: remove crap from the dock
+  command: dockutil --remove all
 
-# Sudoers configuration (enables more convenient Vagrant usage).
-- name: Copy sudoers configuration into place.
-  copy:
-    src: files/etc/sudoers
-    dest: /etc/sudoers
-    mode: 0440
-    validate: 'visudo -cf %s'
-  become: yes
-  when: configure_sudoers
+# MacOS defaults
+- osx_defaults:
+    domain: com.apple.menuextra.battery
+    key: ShowPercent
+    type: string
+    value: YES
 
-# TODO: Configure Sublime Text (see templates/sublime/*).
+- osx_defaults:
+    domain: com.apple.CrashReporter
+    key: DialogType
+    value: developer
+
+- osx_defaults:
+    domain: com.apple.LaunchServices
+    key: LSQuarantine
+    type: bool
+    value: false
+
+- osx_defaults:
+    domain: NSGlobalDomain
+    key: KeyRepeat
+    type: int
+    value: 1
+
+- osx_defaults:
+    domain: NSGlobalDomain
+    key: InitialKeyRepeat
+    type: int
+    value: 10
+
+- osx_defaults:
+    domain: com.apple.finder
+    key: NewWindowTarget
+    type: string
+    value: PfDe
+
+- osx_defaults:
+    domain: com.apple.finder
+    key: NewWindowTargetPath
+    type: string
+    value: file://${HOME}/Desktop/
+
+- osx_defaults:
+    domain: NSGlobalDomain
+    key: NSNavPanelExpandedStateForSaveMode
+    type: bool
+    value: true
+
+- osx_defaults:
+    domain: NSGlobalDomain
+    key: NSNavPanelExpandedStateForSaveMode2
+    type: bool
+    value: true
+

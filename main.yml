@@ -4,114 +4,28 @@
 
   vars_files:
     - vars/main.yml
-    - vars/welkin.yml
 
   roles:
-#    - geerlingguy.homebrew
     - geerlingguy.dotfiles
 
   tasks:
-    # git setup
-    - known_hosts:
-        path: ~/.ssh/known_hosts
-        host: github.com
-        key: "github.com ssh-dss AAAAB3NzaC1kc3MAAACBANGFW2P9xlGU3zWrymJgI/lKo//ZW2WfVtmbsUZJ5uyKArtlQOT2+WRhcg4979aFxgKdcsqAYW3/LS1T2km3jYW/vr4Uzn+dXWODVk5VlUiZ1HFOHf6s6ITcZvjvdbp6ZbpM+DuJT7Bw+h5Fx8Qt8I16oCZYmAPJRtu46o9C2zk1AAAAFQC4gdFGcSbp5Gr0Wd5Ay/jtcldMewAAAIATTgn4sY4Nem/FQE+XJlyUQptPWMem5fwOcWtSXiTKaaN0lkk2p2snz+EJvAGXGq9dTSWHyLJSM2W6ZdQDqWJ1k+cL8CARAqL+UMwF84CR0m3hj+wtVGD/J4G5kW2DBAf4/bqzP4469lT+dF2FRQ2L9JKXrCWcnhMtJUvua8dvnwAAAIB6C4nQfAA7x8oLta6tT+oCk2WQcydNsyugE8vLrHlogoWEicla6cWPk7oXSspbzUcfkjN3Qa6e74PhRkc7JdSdAlFzU3m7LMkXo1MHgkqNX8glxWNVqBSc0YRdbFdTkL0C6gtpklilhvuHQCdbgB3LBAikcRkDp+FCVkUgPC/7Rw=="
-
-    - known_hosts:
-        path: ~/.ssh/known_hosts
-        host: github.com
-        key: "github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=="
-
     # common
     - include: tasks/ansible-setup.yml
-    - include: tasks/python.yml
-
-    # tom stuff
 
     # for some reason oh-my-zsh re-prompts for sudo password
     - include: tasks/oh-my-zsh.yml
 
     # first need to make sure packages are "present" then need to link them as a separate step
-    - homebrew: name={{ item }} state="present"
+    - name: "Install homebrew packages"
+      homebrew: name={{ item }} state="present"
       with_items: "{{ homebrew_installed_packages_tom }}"
 
-    - homebrew: name={{ item }} state="linked"
+    - name: "Link homebrew packages"
+      homebrew: name={{ item }} state="linked"
       with_items: "{{ homebrew_installed_packages_tom }}"
 
-    - homebrew_cask: name={{ item }}
+    - name: "Install homebrew cask apps"
+      homebrew_cask: name={{ item }}
       with_items: "{{ homebrew_cask_apps_tom }}"
 
-    - copy:
-        src: files/spectacle/Shortcuts.json
-        dest: ~/Library/Application Support/Spectacle/Shortcuts.json
-
-    - name: remove crap from the dock
-      command: dockutil --remove all
-
-    - osx_defaults:
-        domain: com.apple.menuextra.battery
-        key: ShowPercent
-        type: string
-        value: YES
-
-    - osx_defaults:
-        domain: com.apple.CrashReporter
-        key: DialogType
-        value: developer
-
-    - osx_defaults:
-        domain: com.apple.LaunchServices
-        key: LSQuarantine
-        type: bool
-        value: false
-
-    - osx_defaults:
-        domain: NSGlobalDomain
-        key: KeyRepeat
-        type: int
-        value: 1
-
-    - osx_defaults:
-        domain: NSGlobalDomain
-        key: InitialKeyRepeat
-        type: int
-        value: 10
-
-    - osx_defaults:
-        domain: com.apple.finder
-        key: NewWindowTarget
-        type: string
-        value: PfDe
-
-    - osx_defaults:
-        domain: com.apple.finder
-        key: NewWindowTargetPath
-        type: string
-        value: file://${HOME}/Desktop/
-
-    - osx_defaults:
-        domain: NSGlobalDomain
-        key: NSNavPanelExpandedStateForSaveMode
-        type: bool
-        value: true
-
-    - osx_defaults:
-        domain: NSGlobalDomain
-        key: NSNavPanelExpandedStateForSaveMode2
-        type: bool
-        value: true
-
-    # welkin stuff
-
-    - git: repo=git://github.com:welkinhealth/welkin.git
-           dest={{ welkin_git_checkout }}
-           update=no
-
-    - include: tasks/welkin-tasks.yml
-
-    #- include: tasks/preferences.yml
-
-    # TODO: Use sudo once .osx can be run via root with no user interaction.
-    #- name: Run .osx dotfiles.
-    #  shell: ~/.osx --no-restart
-    #  changed_when: false
+    - include: tasks/preferences.yml
