@@ -4,4 +4,6 @@
 
 - name: "Install global Python packages"
   sudo: true
+  # need to "ignore installed" because of a six issue with built-in python; see:
+  # https://github.com/pypa/pip/issues/3165
   pip: name="virtualenvwrapper" extra_args="--ignore-installed"

@@ -1,7 +1,8 @@
 # wiltzius custom
+- first install homebrew (https://github.com/Homebrew/install)
 - Must install ssh pub/priv key first, and ensure that ssh key is added to your github account
 - Then use git to check out this repository
-- Then install ansible: `sudo easy_install pip && sudo pip install ansible`
+- Then install ansible: brew install ansible
 - then ansible-galaxy install -r requirements.yml
 
 # Mac Development Ansible Playbook
