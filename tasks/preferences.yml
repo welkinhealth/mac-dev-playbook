@@ -1,7 +1,8 @@
 ---
 
 # App-specific preferences
-- copy:
+- name: Install Spectacle shortcut pref file
+  copy:
     src: files/spectacle/Shortcuts.json
     dest: ~/Library/Application Support/Spectacle/Shortcuts.json
 
