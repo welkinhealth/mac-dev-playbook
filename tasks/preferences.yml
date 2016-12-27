@@ -31,13 +31,13 @@
     domain: NSGlobalDomain
     key: KeyRepeat
     type: int
-    value: 1
+    value: 2
 
 - osx_defaults:
     domain: NSGlobalDomain
     key: InitialKeyRepeat
     type: int
-    value: 10
+    value: 25
 
 - osx_defaults:
     domain: com.apple.finder
