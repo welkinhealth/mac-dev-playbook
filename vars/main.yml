@@ -1,7 +1,7 @@
 ---
 downloads: ~/.ansible-downloads/
 
-dotfiles_repo: https://github.com/wiltzius/wiltzius-preferences.git
+dotfiles_repo: git@github.com:wiltzius/wiltzius-preferences.git
 dotfiles_repo_accept_hostkey: yes
 dotfiles_repo_local_destination: ~/wiltzius-preferences
 dotfiles_files:
@@ -23,6 +23,7 @@ homebrew_cask_apps_tom:
   - dropbox
   - google-drive
   - google-chrome
+  - ngrok
 #  - sketch
   - pycharm
   - iterm2
