@@ -21,7 +21,7 @@ homebrew_installed_packages_tom:
 
 homebrew_cask_apps_tom:
   - dropbox
-  - google-drive
+  - google-backup-and-sync
   - google-chrome
   - ngrok
 #  - sketch

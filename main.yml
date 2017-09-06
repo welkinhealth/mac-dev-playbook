@@ -16,6 +16,9 @@
     - include: tasks/oh-my-zsh.yml
 
     # first need to make sure packages are "present" then need to link them as a separate step
+    - name: "Tap caskroom"
+      command: brew tap caskroom/drivers
+
     - name: "Install homebrew packages"
       homebrew: name={{ item }} state="present"
       with_items: "{{ homebrew_installed_packages_tom }}"
