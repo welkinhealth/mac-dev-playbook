@@ -33,3 +33,6 @@
       with_items: "{{ homebrew_cask_apps_tom }}"
 
     - include: tasks/preferences.yml
+
+    - name: "Use Git credential helper"
+      command: git config --global credential.helper osxkeychain
