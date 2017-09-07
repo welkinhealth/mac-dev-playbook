@@ -15,10 +15,11 @@
     # for some reason oh-my-zsh re-prompts for sudo password
     - include: tasks/oh-my-zsh.yml
 
-    # first need to make sure packages are "present" then need to link them as a separate step
-    - name: "Tap caskroom"
+    # Some caskroom apps are in this tap
+    - name: "Tap caskroom/drivers"
       command: brew tap caskroom/drivers
 
+    # first need to make sure packages are "present" then need to link them as a separate step
     - name: "Install homebrew packages"
       homebrew: name={{ item }} state="present"
       with_items: "{{ homebrew_installed_packages_tom }}"
