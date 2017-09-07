@@ -1,0 +1,9 @@
+
+Host *
+  # use the MacOS keychain for SSH keys
+  UseKeychain yes
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/id_rsa
+
+# keep idle SSH connections alive
+ServerAliveInterval 10
