@@ -18,6 +18,7 @@ homebrew_installed_packages_tom:
   - nmap
   - wget
   - dockutil
+  - gnu-time
 
 homebrew_cask_apps_tom:
   - dropbox
