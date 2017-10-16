@@ -72,3 +72,8 @@
     type: bool
     value: true
 
+- osx_defaults:
+    domain: NSGlobalDomain
+    key: ApplePressAndHoldEnabled
+    type: bool
+    value: alse
