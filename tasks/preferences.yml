@@ -76,4 +76,4 @@
     domain: NSGlobalDomain
     key: ApplePressAndHoldEnabled
     type: bool
-    value: alse
+    value: false
